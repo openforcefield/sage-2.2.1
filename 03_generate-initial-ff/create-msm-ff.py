@@ -219,11 +219,14 @@ def main(
     for smirks in all_parameters["angle_k"]:
         angle = angle_handler.parameters[smirks]
 
-        angle_eq = np.mean(all_parameters["angle_eq"][smirks]) * unit.radian
-        angle.angle = angle_eq.to(unit.degree)
+        # allow for empty smirks
+        if all_parameters["angle_eq"][smirks]:
+            angle_eq = np.mean(all_parameters["angle_eq"][smirks]) * unit.radian
+            angle.angle = angle_eq.to(unit.degree)
 
-        angle_k = np.mean(all_parameters["angle_k"][smirks]) * kj_per_mol_per_rad2
-        angle.k = angle_k.to(unit.kilocalorie_per_mole / unit.radian ** 2)
+        if all_parameters["angle_k"][smirks]:
+            angle_k = np.mean(all_parameters["angle_k"][smirks]) * kj_per_mol_per_rad2
+            angle.k = angle_k.to(unit.kilocalorie_per_mole / unit.radian ** 2)
     
     ff.to_file(output_force_field)
 
