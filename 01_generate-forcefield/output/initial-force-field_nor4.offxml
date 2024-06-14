@@ -114,8 +114,8 @@
         <Angle smirks="[*;r6:1]~;@[*;r5;x4,*;r5;X4:2]~;@[*;r5;x2:3]" angle="123.3883854468 * degree ** 1" k="94.63724536934 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a13a"></Angle>
         <Angle smirks="[*:1]~;!@[*;X3;r5:2]~;@[*;r5:3]" angle="124.7638724138 * degree ** 1" k="83.72517627035 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a14"></Angle>
         <Angle smirks="[#8X1:1]~[#6X3:2]~[#8:3]" angle="123.884602033 * degree ** 1" k="157.683696058 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a15"></Angle>
-        <Angle smirks="[*:1]~[#6X2:2]~[*:3]" angle="178.03216488466285 * degree ** 1" k="90.9419905012 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a16"></Angle>
-        <Angle smirks="[*:1]~[#7X2:2]~[*:3]" angle="176.02345454674733 * degree ** 1" k="92.84676041839 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a17"></Angle>
+        <Angle smirks="[*:1]~[#6X2:2]~[*:3]" angle="180.0 * degree ** 1" k="90.9419905012 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a16"></Angle>
+        <Angle smirks="[*:1]~[#7X2:2]~[*:3]" angle="180.0 * degree ** 1" k="92.84676041839 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a17"></Angle>
         <Angle smirks="[*:1]~[#7X4,#7X3,#7X2-1:2]~[*:3]" angle="113.0535542176 * degree ** 1" k="229.7366557677 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a18"></Angle>
         <Angle smirks="[*:1]@-[r!r6;#7X4,#7X3,#7X2-1:2]@-[*:3]" angle="105.8401571906 * degree ** 1" k="265.3585554223 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a18a"></Angle>
         <Angle smirks="[#1:1]-[#7X4,#7X3,#7X2-1:2]-[*:3]" angle="109.8280614024 * degree ** 1" k="93.85648326614 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a19"></Angle>
@@ -126,7 +126,7 @@
         <Angle smirks="[#1:1]-[#7X2+0:2]~[*:3]" angle="115.552080361 * degree ** 1" k="214.9469380689 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a24"></Angle>
         <Angle smirks="[#6,#7,#8:1]-[#7X3:2](~[#8X1])~[#8X1:3]" angle="121.0803418862 * degree ** 1" k="147.381217677 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a25"></Angle>
         <Angle smirks="[#8X1:1]~[#7X3:2]~[#8X1:3]" angle="124.9682447718 * degree ** 1" k="136.5596518574 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a26"></Angle>
-        <Angle smirks="[*:1]~[#7X2:2]~[#7X1:3]" angle="175.86536907731292 * degree ** 1" k="101.8769252507 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a27"></Angle>
+        <Angle smirks="[*:1]~[#7X2:2]~[#7X1:3]" angle="180.0 * degree ** 1" k="101.8769252507 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a27"></Angle>
         <Angle smirks="[*:1]-[#8:2]-[*:3]" angle="111.9874516071 * degree ** 1" k="237.851218935 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a28"></Angle>
         <Angle smirks="[#6X3,#7:1]~;@[#8;r:2]~;@[#6X3,#7:3]" angle="108.1782929371 * degree ** 1" k="329.0368535669 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a29"></Angle>
         <Angle smirks="[*:1]-[#8X2+1:2]=[*:3]" angle="125.1570722794 * degree ** 1" k="308.4405595435 * mole ** -1 * radian ** -2 * kilocalorie ** 1" id="a30"></Angle>
