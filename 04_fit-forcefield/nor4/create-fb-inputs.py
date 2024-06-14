@@ -102,6 +102,12 @@ def load_training_data(
     help="The directory to write the ForceBalance inputs to.",
 )
 @click.option(
+    "--frozen-angle-file",
+    type=click.Path(exists=False, dir_okay=False, file_okay=True),
+    required=False,
+    help="The path to a JSON file containing frozen angle smirks (e.g. for linear angles)",
+)
+@click.option(
     "--smarts-to-exclude",
     type=click.Path(exists=True, dir_okay=False, file_okay=True),
     default=None,
@@ -149,6 +155,7 @@ def generate(
     valence_to_optimize: str,
     torsions_to_optimize: str,
     output_directory: str,
+    frozen_angle_file: typing.Optional[str] = None,
     smarts_to_exclude: typing.Optional[str] = None,
     smiles_to_exclude: typing.Optional[str] = None,
     verbose: bool = False,
@@ -172,6 +179,7 @@ def generate(
         ProperTorsionHyperparameters,
         BondSMIRKS,
         ProperTorsionSMIRKS,
+        ImproperTorsionSMIRKS,
     )
 
     torsion_training_set, optimization_training_set = load_training_data(
@@ -217,13 +225,12 @@ def generate(
         ),
     ]
 
-    # a16, a17, a27, a35
-    linear_angle_smirks = [
-        "[*:1]~[#6X2:2]~[*:3]",  # a16
-        "[*:1]~[#7X2:2]~[*:3]",  # a17
-        "[*:1]~[#7X2:2]~[#7X1:3]",  # a27
-        "[*:1]=[#16X2:2]=[*:3]",
-    ]  # a35, this one anyways doesn't have a training target for ages
+    linear_angle_smirks = []
+    if frozen_angle_file:
+        with open(frozen_angle_file, "r") as f:
+            linear_angle_smirks = json.load(f)["smirks"]
+    print(f"Frozen angle SMIRKS: {linear_angle_smirks}")
+        
 
     with open(valence_to_optimize, "r") as f:
         valence_smirks = json.load(f)
@@ -243,7 +250,6 @@ def generate(
 
     ff = ForceField(forcefield)
 
-    # doesn't refit impropers
     torsion_handler = ff.get_parameter_handler("ProperTorsions")
     for smirks in torsion_smirks["ProperTorsions"]:
         original_k = torsion_handler.parameters[smirks].k
@@ -254,6 +260,18 @@ def generate(
             attributes=attributes
             )
         )
+    # re-fit impropers directly from force field
+    improper_torsion_handler = ff.get_parameter_handler("ImproperTorsions")
+    for improper in improper_torsion_handler.parameters:
+        original_k = improper.k
+        attributes = {f"k{i + 1}" for i in range(len(original_k))}
+        target_parameters.append(
+            ImproperTorsionSMIRKS(
+                smirks=improper.smirks,
+                attributes=attributes
+            )
+        )
+
 
     optimization_schema = OptimizationSchema(
         id=tag,
