@@ -78,6 +78,7 @@ def download_force_field(
             linear_angle_smirks = json.load(file)["smirks"]
     for smirks in linear_angle_smirks:
         for angle in angle_handler.get_parameter({"smirks": smirks}):
+            print(f"Setting {angle.id} to 180 degrees")
             angle.angle = 180.0 * unit.degree
 
     # Write out file
