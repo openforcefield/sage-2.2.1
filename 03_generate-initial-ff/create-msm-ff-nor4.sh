@@ -17,7 +17,8 @@ source ~/.bashrc
 conda activate fb_196_ic_0318    
 
 python create-msm-ff.py                                                                                     \
-    --initial-force-field       "../01_generate-forcefield/output/initial-force-field_nor4.offxml"  \
+    --initial-force-field       "../01_generate-forcefield/output/initial-force-field_nor4.offxml"          \
+    --frozen-angle-file         "../01_generate-forcefield/linear-angles.json"                              \
     --optimization-dataset      "../02_curate-data/output/optimization-training-set.json"                   \
     --working-directory         "working-directory"                                                         \
     --output                    "output/initial-force-field-msm_nor4.offxml"

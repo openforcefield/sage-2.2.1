@@ -81,6 +81,12 @@ def calculate_parameters(
     help="The path to the optimization dataset.",
 )
 @click.option(
+    "--frozen-angle-file",
+    type=click.Path(exists=False, dir_okay=False, file_okay=True),
+    required=False,
+    help="The path to a JSON file containing frozen angle smirks (e.g. for linear angles)",
+)
+@click.option(
     "--working-directory",
     type=click.Path(exists=False, dir_okay=True, file_okay=False),
     required=False,
@@ -98,6 +104,7 @@ def main(
     initial_force_field: str,
     output_force_field: str,
     optimization_dataset: str,
+    frozen_angle_file: typing.Optional[str] = None,
     working_directory: typing.Optional[str] = None,
     verbose: bool = False
 ):
@@ -129,6 +136,12 @@ def main(
 
     ff = ForceField(initial_force_field, allow_cosmetic_attributes=True)
 
+    # load potential frozen angles
+    frozen_angle_smirks = []
+    if frozen_angle_file is not None:
+        with open(frozen_angle_file, "r") as f:
+            frozen_angle_smirks = json.load(f)["smirks"]
+
     # calculate MSM parameters for the dataset
     records_and_molecules = list(hessian_set.to_records())
     if verbose:
@@ -153,7 +166,8 @@ def main(
         else:
             for key, values in parameters.items():
                 for smirks, value in values.items():
-                    all_parameters[key][smirks].extend(value)
+                    if key == "angle_eq": # don't set frozen angles
+                        all_parameters[key][smirks].extend(value)
     
     if working_directory is not None:
         seminario_file = os.path.join(working_directory, "seminario_parameters.json")
