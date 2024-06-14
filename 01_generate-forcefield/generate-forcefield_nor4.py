@@ -1,3 +1,5 @@
+import json
+import typing
 import click
 
 
@@ -10,6 +12,12 @@ import click
     help="The path to the output force field file.",
 )
 @click.option(
+    "--linear-angle-file",
+    type=click.Path(exists=False, dir_okay=False, file_okay=True),
+    required=False,
+    help="The path to a JSON file containing linear angle smirks to re-set to 180",
+)
+@click.option(
     "--force-field-name",
     type=str,
     default="openff_unconstrained-2.1.0.offxml",
@@ -18,6 +26,7 @@ import click
 )
 def download_force_field(
     output_path: str,
+    linear_angle_file: typing.Optional[str] = None,
     force_field_name: str = "openff_unconstrained-2.1.0.offxml",
 ):
     from openff.toolkit import ForceField
@@ -62,6 +71,14 @@ def download_force_field(
     # Fix t65
     torsion = torsion_handler.get_parameter({"id": "t65"})[0]
     torsion.smirks = "[*:1]-[#6X4:2]-[#7X3:3](~[#8X1])~[#8X1:4]"
+
+    # set linear angle values to 180
+    if linear_angle_file:
+        with open(linear_angle_file, "r") as file:
+            linear_angle_smirks = json.load(file)["smirks"]
+    for smirks in linear_angle_smirks:
+        for angle in angle_handler.get_parameter({"smirks": smirks}):
+            angle.angle = 180.0 * unit.degree
 
     # Write out file
     force_field.to_file(output_path)
