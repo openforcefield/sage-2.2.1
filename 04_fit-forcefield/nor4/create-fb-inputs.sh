@@ -23,7 +23,7 @@ python create-fb-inputs.py                                                      
     --forcefield                "../../03_generate-initial-ff/output/initial-force-field-msm_nor4.offxml"   \
     --valence-to-optimize       "../../02_curate-data/output/training-valence-smirks_nor4.json"             \
     --torsions-to-optimize      "../../02_curate-data/output/training-torsion-smirks_nor4.json"             \
-    --frozen-angle-file         "../../01_curate-data/linear-angles.json"                               \
+    --frozen-angle-file         "../../01_generate-forcefield/linear-angles.json"                               \
     --smiles-to-exclude         "smiles-to-exclude.dat"                                             \
     --smarts-to-exclude         "smarts-to-exclude.dat"                                             \
     --max-iterations            100                                                                 \
