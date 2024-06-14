@@ -6,6 +6,59 @@ import typing
 import click
 
 
+def filter_for_smarts_or_smiles(
+    entry,
+    smarts_to_exclude: typing.Optional[typing.List[str]] = None,
+    inchi_keys_to_exclude: typing.Optional[typing.List[str]] = None,
+):
+    """
+    Normal filtering with the to_records() call is incredibly slow;
+    copy out the actual filtering function to speed it up
+    """
+    from openff.toolkit import Molecule
+
+    mol = Molecule.from_mapped_smiles(entry.cmiles, allow_undefined_stereo=True)
+
+    if smarts_to_exclude:
+        for smarts in smarts_to_exclude:
+            if mol.chemical_environment_matches(smarts):
+                return False
+    
+    if inchi_keys_to_exclude:
+        if mol.to_inchikey(fixed_hydrogens=True) in inchi_keys_to_exclude:
+            return False
+    return True
+        
+
+def filter_dataset(
+    dataset,
+    smarts_to_exclude: typing.Optional[typing.List[str]] = None,
+    smiles_to_exclude: typing.Optional[typing.List[str]] = None,
+):
+    from openff.toolkit import Molecule
+
+    inchi_keys_to_exclude = []
+    if smiles_to_exclude:
+        inchi_keys_to_exclude = [
+            Molecule.from_smiles(smiles).to_inchikey(fixed_hydrogens=True)
+            for smiles in smiles_to_exclude
+        ]
+    
+    key = list(dataset.entries)[0]
+    original_dataset = dataset.entries[key]
+    filtered = [
+        entry
+        for entry in original_dataset
+        if filter_for_smarts_or_smiles(
+            entry,
+            smarts_to_exclude=smarts_to_exclude,
+            inchi_keys_to_exclude=inchi_keys_to_exclude,
+        )
+    ]
+    dataset.entries[key] = filtered
+
+
+
 def load_training_data(
     optimization_dataset: str,
     torsion_dataset: str,
@@ -36,9 +89,14 @@ def load_training_data(
     if verbose:
         print(f"Loaded torsion training set with {torsion_training_set.n_results} entries.")
 
-    torsion_training_set = torsion_training_set.filter(
-        SMARTSFilter(smarts_to_exclude=exclude_smarts),
-        SMILESFilter(smiles_to_exclude=exclude_smiles),
+    # torsion_training_set = torsion_training_set.filter(
+    #     SMARTSFilter(smarts_to_exclude=exclude_smarts),
+    #     SMILESFilter(smiles_to_exclude=exclude_smiles),
+    # )
+    filter_dataset(
+        torsion_training_set,
+        smarts_to_exclude=exclude_smarts,
+        smiles_to_exclude=exclude_smiles,
     )
 
     if verbose:
@@ -47,9 +105,14 @@ def load_training_data(
     optimization_training_set = OptimizationResultCollection.parse_file(optimization_dataset)
     if verbose:
         print(f"Loaded optimization training set with {optimization_training_set.n_results} entries.")
-    optimization_training_set = optimization_training_set.filter(
-        SMARTSFilter(smarts_to_exclude=exclude_smarts),
-        SMILESFilter(smiles_to_exclude=exclude_smiles),
+    # optimization_training_set = optimization_training_set.filter(
+    #     SMARTSFilter(smarts_to_exclude=exclude_smarts),
+    #     SMILESFilter(smiles_to_exclude=exclude_smiles),
+    # )
+    filter_dataset(
+        optimization_training_set,
+        smarts_to_exclude=exclude_smarts,
+        smiles_to_exclude=exclude_smiles,
     )
     if verbose:
         print(f"Filtered optimization training set to {optimization_training_set.n_results} entries.")

@@ -7,8 +7,8 @@
 #SBATCH --account dmobley_lab
 #SBATCH --export ALL
 #SBATCH --constraint=fastscratch
-#SBATCH -o sage_220_nor4_fbinp.out
-#SBATCH -e sage_220_nor4_fbinp.err
+#SBATCH -o sage_220_nor4_fbinp.out-%A
+#SBATCH -e sage_220_nor4_fbinp.err-%A
 
 date
 hostname
