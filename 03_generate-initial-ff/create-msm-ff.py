@@ -166,8 +166,9 @@ def main(
         else:
             for key, values in parameters.items():
                 for smirks, value in values.items():
-                    if key == "angle_eq": # don't set frozen angles
-                        all_parameters[key][smirks].extend(value)
+                    if key == "angle_eq" and smirks in frozen_angle_smirks: # don't set frozen angles
+                        continue
+                    all_parameters[key][smirks].extend(value)
     
     if working_directory is not None:
         seminario_file = os.path.join(working_directory, "seminario_parameters.json")
