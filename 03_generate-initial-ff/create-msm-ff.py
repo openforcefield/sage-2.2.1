@@ -216,7 +216,7 @@ def main(
 
     kj_per_mol_per_rad2 = unit.kilojoule_per_mole / (unit.radian ** 2)
     angle_handler = ff.get_parameter_handler("Angles")
-    for smirks in all_parameters["angle_eq"]:
+    for smirks in all_parameters["angle_k"]:
         angle = angle_handler.parameters[smirks]
 
         angle_eq = np.mean(all_parameters["angle_eq"][smirks]) * unit.radian
