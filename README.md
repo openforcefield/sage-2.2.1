@@ -13,7 +13,25 @@ Most files in this force field were originally copied from the
 [OpenFF 2.2.0](https://github.com/openforcefield/sage-2.2.0)
 repository, and then updated or modified.
 
-## Fitting pipeline
+<!-- vscode-markdown-toc -->
+* 1. [Fitting pipeline](#Fittingpipeline)
+* 2. [Python environment](#Pythonenvironment)
+* 3. [Changes](#Changes)
+	* 3.1. [Global benchmarks](#Globalbenchmarks)
+	* 3.2. [Sulfamide angles remain similar to 2.2.0](#Sulfamideanglesremainsimilarto2.2.0)
+	* 3.3. [3-membered ring angle parameters remain similar to 2.2.0](#memberedringangleparametersremainsimilarto2.2.0)
+	* 3.4. [Linear angles stay linear.](#Linearanglesstaylinear.)
+* 4. [Parameter changes](#Parameterchanges)
+	* 4.1. [Bond, improper, and proper torsion parameters don't change much](#Bondimproperandpropertorsionparametersdontchangemuch)
+	* 4.2. [Several angle parameters change substantially](#Severalangleparameterschangesubstantially)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
+##  1. <a name='Fittingpipeline'></a>Fitting pipeline
 The code that was used to produce the fit is all included here, and should be reproducible. The fit is performed in several steps, with instructions for how to run each step in the `README` file in each directory:
 
 1. `01_generate-forcefield`: Generate an initial "template" force field, which contains the desired SMIRKs patterns for all bond/angle terms, the desired SMIRKs patterns and initial values for all torsion terms, and the desired final value for all other parameters such as electrostatics.
@@ -44,7 +62,7 @@ This is a new directory that plots the benchmark results in the
 benchmarking directory.
 
 
-## Python environment
+##  2. <a name='Pythonenvironment'></a>Python environment
 
 Where possible, shell scripts (`*.sh`) have been provided
 showing which environments were used to run Python scripts,
@@ -65,7 +83,7 @@ may need to be created instead. Smaller specification files
 can be found in the 2.2.0 repo.
 
 
-## Changes
+##  3. <a name='Changes'></a>Changes
 
 The following angles below had their equilibrium values set to 180 degrees.
 
@@ -76,7 +94,7 @@ The following angles below had their equilibrium values set to 180 degrees.
 | a27       | `[*:1]~[#7X2:2]~[#7X1:3]` | 176           |
 | a35*      | `[*:1]=[#16X2:2]=[*:3]`   | 180           |
 
-### Global benchmarks
+###  3.1. <a name='Globalbenchmarks'></a>Global benchmarks
 
 The global benchmarks (ddEs, RMSDs, and TFDS) look very similar
 to 2.2.0:
@@ -86,14 +104,14 @@ to 2.2.0:
 ![RMSDs](06_plot-figures/images/all/aa_rmsds.png)
 ![TFDs](06_plot-figures/images/all/tfds.png)
 
-### Sulfamide angles remain similar to 2.2.0
+###  3.2. <a name='Sulfamideanglesremainsimilarto2.2.0'></a>Sulfamide angles remain similar to 2.2.0
 
 Sulfamide angles improve relative to 2.1.0, and remain similar to 2.2.0.
 
 ![a31](06_plot-figures/images/mm-vs-qm/a31.png)
 ![a32](06_plot-figures/images/mm-vs-qm/a32.png)
 
-### 3-membered ring angle parameters remain similar to 2.2.0
+###  3.3. <a name='memberedringangleparametersremainsimilarto2.2.0'></a>3-membered ring angle parameters remain similar to 2.2.0
 
 They broadly improve from 2.1.0, except the a4 parameter.
 
@@ -104,7 +122,7 @@ They broadly improve from 2.1.0, except the a4 parameter.
 
 The a4 parameter outliers largely concern three unique molecules.
 
-### Linear angles stay linear.
+###  3.4. <a name='Linearanglesstaylinear.'></a>Linear angles stay linear.
 
 a35 was not covered in either the testing or training data so
 is not presented here.
@@ -119,9 +137,9 @@ than 175 degrees. All data points are various conformers of
 
 ![a27 scatter](06_plot-figures/images/mm-vs-qm/a27-scatter.png)
 
-## Parameter changes
+##  4. <a name='Parameterchanges'></a>Parameter changes
 
-### Bond, improper, and proper torsion parameters don't change much
+###  4.1. <a name='Bondimproperandpropertorsionparametersdontchangemuch'></a>Bond, improper, and proper torsion parameters don't change much
 
 Parameter change plots can be seen in the
 [parameter-changes](06_plot-figures/images/parameter-changes/)
@@ -129,7 +147,7 @@ directory. The scale of the y-axis for bonds,
 propers, and improper torsion parameters don't change much.
 
 
-### Several angle parameters change substantially
+###  4.2. <a name='Severalangleparameterschangesubstantially'></a>Several angle parameters change substantially
 
 However, several angle parameters do change substantially.
 
