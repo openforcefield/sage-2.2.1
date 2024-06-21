@@ -85,3 +85,70 @@ to 2.2.0:
 ![ddE CFD](06_plot-figures/images/all/abs_dde.png)
 ![RMSDs](06_plot-figures/images/all/aa_rmsds.png)
 ![TFDs](06_plot-figures/images/all/tfds.png)
+
+### Sulfamide angles remain similar to 2.2.0
+
+Sulfamide angles improve relative to 2.1.0, and remain similar to 2.2.0.
+
+![a31](06_plot-figures/images/mm-vs-qm/a31.png)
+![a32](06_plot-figures/images/mm-vs-qm/a32.png)
+
+### 3-membered ring angle parameters remain similar to 2.2.0
+
+They broadly improve from 2.1.0, except the a4 parameter.
+
+![a3](06_plot-figures/images/mm-vs-qm/a3.png)
+![a4](06_plot-figures/images/mm-vs-qm/a4.png)
+![a5](06_plot-figures/images/mm-vs-qm/a5.png)
+![a6](06_plot-figures/images/mm-vs-qm/a6.png)
+
+The a4 parameter outliers largely concern three unique molecules.
+
+### Linear angles stay linear.
+
+a35 was not covered in either the testing or training data so
+is not presented here.
+
+![a16](06_plot-figures/images/mm-vs-qm/a16.png)
+![a17](06_plot-figures/images/mm-vs-qm/a17.png)
+![a27](06_plot-figures/images/mm-vs-qm/a27.png)
+
+The apparent worse performance for a27 is due to QM angles less
+than 175 degrees. All data points are various conformers of
+2 unique molecules.
+
+![a27 scatter](06_plot-figures/images/mm-vs-qm/a27-scatter.png)
+
+## Parameter changes
+
+### Bond, improper, and proper torsion parameters don't change much
+
+Parameter change plots can be seen in the
+[parameter-changes](06_plot-figures/images/parameter-changes/)
+directory. The scale of the y-axis for bonds,
+propers, and improper torsion parameters don't change much.
+
+
+### Several angle parameters change substantially
+
+However, several angle parameters do change substantially.
+
+![angles k](06_plot-figures/images/parameter-changes/Angles_k.png)
+![angles angle](06_plot-figures/images/parameter-changes/Angles_angle.png)
+
+Below a table of equilibrium angles:
+
+| Parameter | SMIRKS                                        | MSM | 2.2.0 | 2.2.1-rc1 |
+|-----------|-----------------------------------------------|-----|-------|-----------|
+| a18a      | `[*:1]@-[r!r6;#7X4,#7X3,#7X2-1:2]@-[*:3]`     | 95  | 94    | 95        |
+| a20       | `[*:1]~[#7X3$(*~[#6X3,#6X2,#7X2+0]):2]~[*:3]` | 120 | 122   | 120       |
+| a29       | `[#6X3,#7:1]~;@[#8;r:2]~;@[#6X3,#7:3]`        | 110 | 121   | 109       |
+| a34       | `[*:1]~[#16X2,#16X3+1:2]~[*:3]`               | 98  | 100   | 98        |
+| a37       | `[#6X3:1]-[#16X2:2]-[#6X3:3]`                 | 91  | 102   | 91        |
+
+These differences appear largely to have improved the fit to QM angles.
+
+![a29](06_plot-figures/images/mm-vs-qm/a29.png)
+![a37](06_plot-figures/images/mm-vs-qm/a37.png)
+![a34](06_plot-figures/images/mm-vs-qm/a34.png)
+![a20](06_plot-figures/images/mm-vs-qm/a20.png)
