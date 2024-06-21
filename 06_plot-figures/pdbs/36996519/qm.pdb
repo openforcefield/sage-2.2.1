@@ -1,0 +1,59 @@
+TITLE     MDANALYSIS FRAME 0: Created by PDBWriter
+CRYST1    1.000    1.000    1.000  90.00  90.00  90.00 P 1           1
+REMARK     285 UNITARY VALUES FOR THE UNIT CELL AUTOMATICALLY SET
+REMARK     285 BY MDANALYSIS PDBWRITER BECAUSE UNIT CELL INFORMATION
+REMARK     285 WAS MISSING.
+REMARK     285 PROTEIN DATA BANK CONVENTIONS REQUIRE THAT
+REMARK     285 CRYST1 RECORD IS INCLUDED, BUT THE VALUES ON
+REMARK     285 THIS RECORD ARE MEANINGLESS.
+ATOM      1  C0  UNK X   1      -0.717  -0.748   0.528  1.00  0.00      SYST C  
+ATOM      2  C1  UNK X   1       0.103   0.340  -0.195  1.00  0.00      SYST C  
+ATOM      3  N2  UNK X   1       0.348  -0.000  -1.610  1.00  0.00      SYST N  
+ATOM      4  C3  UNK X   1       1.475   0.476   0.501  1.00  0.00      SYST C  
+ATOM      5  N4  UNK X   1       2.165  -0.838   0.441  1.00  0.00      SYST N  
+ATOM      6  N5  UNK X   1       3.378  -0.807   0.691  1.00  0.00      SYST N  
+ATOM      7  N6  UNK X   1       4.500  -0.897   0.908  1.00  0.00      SYST N  
+ATOM      8  C7  UNK X   1      -0.586   1.712  -0.157  1.00  0.00      SYST C  
+ATOM      9  C8  UNK X   1      -1.815   1.907   0.493  1.00  0.00      SYST C  
+ATOM     10  C9  UNK X   1      -2.443   3.153   0.498  1.00  0.00      SYST C  
+ATOM     11 Br10 UNK X   1      -4.122   3.347   1.405  1.00  0.00      SYSTBR  
+ATOM     12  C11 UNK X   1      -1.878   4.253  -0.142  1.00  0.00      SYST C  
+ATOM     13  C12 UNK X   1      -0.653   4.085  -0.790  1.00  0.00      SYST C  
+ATOM     14  C13 UNK X   1      -0.033   2.840  -0.786  1.00  0.00      SYST C  
+ATOM     15  F14 UNK X   1       1.165   2.761  -1.412  1.00  0.00      SYST F  
+ATOM     16  H15 UNK X   1      -0.873  -0.527   1.589  1.00  0.00      SYST H  
+ATOM     17  H16 UNK X   1      -1.694  -0.879   0.052  1.00  0.00      SYST H  
+ATOM     18  H17 UNK X   1      -0.179  -1.697   0.463  1.00  0.00      SYST H  
+ATOM     19  H18 UNK X   1      -0.544  -0.181  -2.070  1.00  0.00      SYST H  
+ATOM     20  H19 UNK X   1       0.885  -0.866  -1.645  1.00  0.00      SYST H  
+ATOM     21  H20 UNK X   1       2.074   1.236  -0.004  1.00  0.00      SYST H  
+ATOM     22  H21 UNK X   1       1.325   0.768   1.547  1.00  0.00      SYST H  
+ATOM     23  H22 UNK X   1      -2.295   1.081   1.000  1.00  0.00      SYST H  
+ATOM     24  H23 UNK X   1      -2.373   5.218  -0.136  1.00  0.00      SYST H  
+ATOM     25  H24 UNK X   1      -0.168   4.912  -1.299  1.00  0.00      SYST H  
+CONECT    1    2   16   17   18
+CONECT    2    1    3    4    8
+CONECT    3    2   19   20
+CONECT    4    2    5   21   22
+CONECT    5    4    6
+CONECT    6    5    7
+CONECT    7    6
+CONECT    8    2    9   14
+CONECT    9    8   10   23
+CONECT   10    9   11   12
+CONECT   11   10
+CONECT   12   10   13   24
+CONECT   13   12   14   25
+CONECT   14    8   13   15
+CONECT   15   14
+CONECT   16    1
+CONECT   17    1
+CONECT   18    1
+CONECT   19    3
+CONECT   20    3
+CONECT   21    4
+CONECT   22    4
+CONECT   23    9
+CONECT   24   12
+CONECT   25   13
+END
