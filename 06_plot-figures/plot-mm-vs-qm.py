@@ -96,7 +96,7 @@ def main(
     # filter to only contain qcarchive IDs that are calculated
     # for all FFs of interest
     forcefields = [
-        'openff_unconstrained-1.3.1',
+        'openff_unconstrained-2.1.0',
         'openff_unconstrained-2.2.0',
         'openff_unconstrained-2.2.1-rc1'
     ]
