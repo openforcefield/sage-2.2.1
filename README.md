@@ -3,6 +3,10 @@
 This repository contains files and progress in re-fitting OpenFF 2.2.1,
 a patch update to [OpenFF 2.2.0](https://github.com/openforcefield/sage-2.2.0).
 
+**Note: this force field is still in progress, and many files (*especially READMEs*!)
+were copied across from the 2.2.0 repository that require modification.
+Use with caution!**
+
 The goals of this update were to:
 
     * re-fit with linear angles set to 180°
