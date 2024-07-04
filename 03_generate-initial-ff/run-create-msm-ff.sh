@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J sage_220_nor4_msm
+#SBATCH -J sage_220_nor4_msm-half-k
 #SBATCH -p standard
 #SBATCH -t 1-00:00:00
 #SBATCH --nodes=1
@@ -7,8 +7,7 @@
 #SBATCH --account dmobley_lab
 #SBATCH --export ALL
 #SBATCH --constraint=fastscratch
-#SBATCH -o sage_220_nor4_msm.out
-#SBATCH -e sage_220_nor4_msm.err
+#SBATCH -o run-%J.out
 
 date
 hostname
@@ -29,7 +28,7 @@ python create-msm-ff-a27-half-k.py                                              
     --frozen-angle-file         "../01_generate-forcefield/linear-angles.json"                              \
     --optimization-dataset      "../02_curate-data/output/optimization-training-set.json"                   \
     --working-directory         "working-directory-half-k"                                                         \
-    --output                    "output/initial-force-field-msm_nor4.offxml"
+    --output                    "output/initial-force-field-msm_nor4-half-k-a27.offxml"
 
 
 date

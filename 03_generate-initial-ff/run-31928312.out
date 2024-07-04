@@ -1,0 +1,11 @@
+Wed Jul  3 23:31:11 PDT 2024
+hpc3-22-12
+/data/homezvol3/lilyw7/miniforge3/envs/fb_196_ic_0318/lib/python3.10/site-packages/numpy/core/getlimits.py:549: UserWarning: The value of the smallest subnormal for <class 'numpy.float32'> type is zero.
+  setattr(self, word, getattr(machar, word).flat[0])
+/data/homezvol3/lilyw7/miniforge3/envs/fb_196_ic_0318/lib/python3.10/site-packages/numpy/core/getlimits.py:89: UserWarning: The value of the smallest subnormal for <class 'numpy.float32'> type is zero.
+  return self._float_to_str(self.smallest_subnormal)
+/data/homezvol3/lilyw7/miniforge3/envs/fb_196_ic_0318/lib/python3.10/site-packages/numpy/core/getlimits.py:549: UserWarning: The value of the smallest subnormal for <class 'numpy.float64'> type is zero.
+  setattr(self, word, getattr(machar, word).flat[0])
+/data/homezvol3/lilyw7/miniforge3/envs/fb_196_ic_0318/lib/python3.10/site-packages/numpy/core/getlimits.py:89: UserWarning: The value of the smallest subnormal for <class 'numpy.float64'> type is zero.
+  return self._float_to_str(self.smallest_subnormal)
+Wed Jul  3 23:46:23 PDT 2024
