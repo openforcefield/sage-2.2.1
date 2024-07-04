@@ -168,9 +168,6 @@ def main(
                 for smirks, value in values.items():
                     if key == "angle_eq" and smirks in frozen_angle_smirks: # don't set frozen angles
                         continue
-                    # special case a27
-                    if key == "angle_k" and smirks == "[*:1]~[#7X2:2]~[#7X1:3]":
-                        value = value / 2
                     all_parameters[key][smirks].extend(value)
     
     if working_directory is not None:
@@ -229,6 +226,11 @@ def main(
 
         if all_parameters["angle_k"][smirks]:
             angle_k = np.mean(all_parameters["angle_k"][smirks]) * kj_per_mol_per_rad2
+
+            # special case a27
+            if smirks == "[*:1]~[#7X2:2]~[#7X1:3]":
+                angle_k *= 0.5
+                
             angle.k = angle_k.to(unit.kilocalorie_per_mole / unit.radian ** 2)
     
     ff.to_file(output_force_field)
