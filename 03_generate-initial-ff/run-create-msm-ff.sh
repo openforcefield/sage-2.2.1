@@ -23,12 +23,18 @@ conda activate fb_196_ic_0318
 #     --output                    "output/initial-force-field-msm_nor4.offxml"
 
 
-python create-msm-ff-a27-half-k.py                                                                                     \
+# python create-msm-ff-a27-half-k.py                                                                                     \
+#     --initial-force-field       "../01_generate-forcefield/output/initial-force-field_nor4.offxml"          \
+#     --frozen-angle-file         "../01_generate-forcefield/linear-angles.json"                              \
+#     --optimization-dataset      "../02_curate-data/output/optimization-training-set.json"                   \
+#     --working-directory         "working-directory-half-k"                                                         \
+#     --output                    "output/initial-force-field-msm_nor4-half-k-a27.offxml"
+
+python create-msm-ff-a27-quarter-k.py                                                                                     \
     --initial-force-field       "../01_generate-forcefield/output/initial-force-field_nor4.offxml"          \
     --frozen-angle-file         "../01_generate-forcefield/linear-angles.json"                              \
     --optimization-dataset      "../02_curate-data/output/optimization-training-set.json"                   \
-    --working-directory         "working-directory-half-k"                                                         \
-    --output                    "output/initial-force-field-msm_nor4-half-k-a27.offxml"
-
+    --working-directory         "working-directory-quarter-k"                                                         \
+    --output                    "output/initial-force-field-msm_nor4-a27-quarter-k.offxml"
 
 date
