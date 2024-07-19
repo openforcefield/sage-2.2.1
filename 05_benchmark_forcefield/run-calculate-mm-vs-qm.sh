@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -J calculate-mm-vs-qm
-#SBATCH --array=18-18
+#SBATCH --array=0-18
 #SBATCH -p free
 #SBATCH -t 1-00:00:00
 #SBATCH --nodes=1

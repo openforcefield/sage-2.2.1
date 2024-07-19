@@ -26,6 +26,7 @@ COLORS = {
 }
 
 PALETTE = {
+    "OpenFF 2.2.1-a27-half-k": COLORS["cyan"],
     "OpenFF 2.2.1-rc1": COLORS["red"],
     "OpenFF 2.2.0": COLORS["orange"],
     "OpenFF 2.1.0": COLORS["blue"],
