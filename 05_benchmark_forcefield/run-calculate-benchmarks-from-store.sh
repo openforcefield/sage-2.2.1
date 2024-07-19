@@ -21,6 +21,7 @@ FF="openff_unconstrained-2.0.0"
 FF="openff_unconstrained-2.1.0"
 FF="openff_unconstrained-2.2.0"
 # FF="openff_unconstrained-2.2.1-rc1"
+FF="openff_unconstrained-2.2.1-a27-half-k"
 
 python calculate-benchmarks-from-store.py                                   \
     --store                         "${FF}.sqlite"                          \
@@ -29,7 +30,7 @@ python calculate-benchmarks-from-store.py                                   \
     --output                        "output/${FF}"                          \
     --n-workers                     300                     \
     --worker-type                   "slurm"                 \
-    --batch-size                    5                      \
+    --batch-size                    1                      \
     --memory                        16                      \
     --walltime                      480                     \
     --queue                         "free"                  \
