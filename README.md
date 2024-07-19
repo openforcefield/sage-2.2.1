@@ -9,8 +9,8 @@ Use with caution!**
 
 The goals of this update were to:
 
-    * re-fit with linear angles set to 180°
-    * re-fit Improper torsions as well
+* re-fit with linear angles set to 180°
+* re-fit Improper torsions as well
 
 
 Most files in this force field were originally copied from the
@@ -114,6 +114,7 @@ Sulfamide angles improve relative to 2.1.0, and remain similar to 2.2.0.
 
 ![a31](06_plot-figures/images/mm-vs-qm/a31.png)
 ![a32](06_plot-figures/images/mm-vs-qm/a32.png)
+![sulfamide-ligand](05_benchmark_forcefield/smoketests/geometries/36972425/combination.png)
 
 ###  3.3. <a name='memberedringangleparametersremainsimilarto2.2.0'></a>3-membered ring angle parameters remain similar to 2.2.0
 
@@ -123,6 +124,8 @@ They broadly improve from 2.1.0, except the a4 parameter.
 ![a4](06_plot-figures/images/mm-vs-qm/a4.png)
 ![a5](06_plot-figures/images/mm-vs-qm/a5.png)
 ![a6](06_plot-figures/images/mm-vs-qm/a6.png)
+
+![epoxide-ligand](05_benchmark_forcefield/smoketests/geometries/37008138/combination.png)
 
 The a4 parameter outliers largely concern three unique molecules.
 
