@@ -114,9 +114,15 @@ to 2.2.0:
 
 Sulfamide angles improve relative to 2.1.0, and remain similar to 2.2.0.
 
+**Parameter changes**
 ![a31](06_plot-figures/images/mm-vs-qm/a31.png)
 ![a32](06_plot-figures/images/mm-vs-qm/a32.png)
+
+**Geometries**
 ![sulfamide-ligand](05_benchmark_forcefield/smoketests/geometries/36972425/combination.png)
+
+**Internal coordinate RMSDs**
+![sulfamides](06_plot-figures/images/sulfamide/ic_rmsds.png)
 
 ###  3.3. <a name='memberedringangleparametersremainsimilarto2.2.0'></a>3-membered ring angle parameters remain similar to 2.2.0
 
