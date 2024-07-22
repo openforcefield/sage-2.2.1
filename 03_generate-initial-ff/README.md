@@ -1,0 +1,5 @@
+# Generating the initial MSM force field
+
+The scripts here are largely copied from the [Sage 2.2.0 fitting procedure](https://github.com/openforcefield/sage-2.2.0/tree/main/03_generate-initial-ff). Scripts are modified so that for linear angles, e.g. a27, the equilibrium value of the angle is *not set* to the Modified Seminario Method (MSM) value. Instead, they're kept at 180 degrees. The force constant, however, is set to the MSM value.
+
+As part of re-fitting Sage 2.2.1, we experimented with setting the force constant of a27 to lower values (using `create-msm-ff-a27-half-k.py` and `create-msm-ff-a27-quarter-k.py`, which set the force constant of a27 to half or a quarter of the MSM respectively). These scripts are included for the sake of transparency here. However, the script used to generate the 2.2.1-rc1 force field is `create-msm-ff.py`. The output force field is `output/initial-force-field-msm_nor4.offxml`.
