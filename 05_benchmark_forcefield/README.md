@@ -1,58 +1,30 @@
-# Benchmarking the performance of the Sage 2.2.0 fit
+# Benchmarking the performance of the Sage 2.2.1 fit
 
 ## Environment
-The python environment that can be used to run the benchmarking suite is included as `yammbs-env.yaml`. 
-All data here was generated and analyzed with this environment. THe full environment is included as `yammbs-env-full.yaml` 
+The python environment that can be used to run the benchmarking suite is included as `yammbs-env-input.yaml`. The full environment is included as `yammbs-env-full.yaml` 
 
 ## Downloading and caching the benchmark dataset
-We benchmark using the dataset `OpenFF-Industry-Benchmark-Season-1-v1.1`. 
-First, we download this file from QCArchive, and filter out incomplete records or molecules with connectivity changes, using the script `download_dataset.py`.
-We then use the script `filter_dataset_parallel.py` to filter out molecules that cannot be assigned charges, or do not have full parameter coverage with our force fields.
-These scripts can be run with the submit script `submit_download_dataset.sh`.
-Alternatively, the filtered dataset is included in `datasets/OpenFF-Industry-Benchmark-Season-1-v1.1-filtered-charge-coverage.json`.
-
-We then cache the dataset, for faster use with the YAMMBS benchmarking code. 
-This can be accomplished with the script `cache_dataset.py`, run using `submit_cache_dataset.sh`. 
+We benchmark using the dataset `OpenFF Industry Benchmark Season 1 v1.1`. For details on downloading this, please see [the Sage 2.2.0 repo.](https://github.com/openforcefield/sage-2.2.0/tree/main/05_benchmark_forcefield)
+ 
 
 ## Benchmarking the force fields
-To generate the benchmarking data, you can use one of the `submit.sh` scripts. As an example, here is `submit_sage220.sh`, which was used to generate benchmarking data for this release candidate:
+To generate the benchmarking data, use `run-benchmark.sh` which shows an example use of `benchmark.py`.  Please see [the Sage 2.2.0 repo.](https://github.com/openforcefield/sage-2.2.0/tree/main/05_benchmark_forcefield) for more details. The SQLite databases will be attached in a release as they are too large to add to the GitHub repo. Global benchmarks are saved in directories named after the force field. For example, `openff_unconstrained-2.0.0` contains the global benchmarks (dde, rmsd, tfd, icrmsd) for the Sage 2.0.0 force field.
 
-```bash
-savedir="openff_unconstrained-2.2.0-rc1"
-
-python -u  benchmark.py -f "openff_unconstrained-2.2.0-rc1.offxml" -d "datasets/OpenFF-Industry-Benchmark-Season-1-v1.1-filtered-charge-coverage-cache.json" -s "openff_unconstrained-2.2.0-rc1.sqlite" -o $savedir --procs 16
-
-date
-```
-
-This code will benchmark the forcefield specified with the `-f` option, on the dataset specified by `-d`, and save the optimized geometries and energies to an SQLite database specified by `-s`.
-It will also create the `savedir` directory, and save files with the DDE, RMSD, TFD, and ICRMSD for each molecule, organized by QCArchive ID.
+The script `calculate-benchmarks-from-store.py` calculates benchmarks from optimized geometries in an existing SQLite store and stores them in the `output` directory as parquet tables. The script `run-calculate-benchmarks-from-store.sh` shows an example use.
 
 ## Analyzing the benchmarks
+
+`calculate-mm-vs-qm.py` compares the MM and QM values of optimized geometries. Outputs are saved in `mm-vs-qm`. An example use is shown in `run-calculate-mm-vs-qm.sh`. 
+
 The directory `process_bm` contains scripts to process and analyze the benchmarking data. 
 The included script `plot_benchmarks.py` can be used to plot the results of the benchmarking run. Example usage is in `plot_benchmarks.sh`, which shows how to plot the ICRMSD, DDE, RMSD, TFD, as well as filtered versions of all of these for different subsets of the data, and how to exclude known problematic molecules ("outliers") from the plots.
 
-`process_bm/filter_ids` contains files that hold the QCArchive ID's of different subsets of the data, which can be useful for plotting benchmarks for certain functional groups (e.g. 3-membered rings with O, or sulfonamides). 
-
-`process_bm/problem_ids` contain files with the QCArchive IDs of known problematic molecules in the benchmarking dataset, which should be removed before analyzing the benchmarks.
-The problematic molecules excluded fall into two categories: 7-membered rings with distorted QM structures, and hypervalent S with two lone pairs, shown below. 
-The distorted 7-membered rings are excluded as these are not realistic geometries, so we do not wish to benchmark how well our force fields reproduce these structures.
-The hypervalent S molecules are excluded as they are not assigned an appropriate parameter, and as a result optimize to very incorrect geometries and energies. 
-This is a known problem we are working to address, but in the mean time they do not provide a useful assessment of the performance of our force fields.
-![problem_molecules](https://github.com/openforcefield/sage-2.2.0/assets/29759281/afd0c0d5-4e53-4be8-a00d-db919d0285ef)
-
-Benchmark plots can be found in `Sage_220_benchmark`.
-
 ## Canary/smoke tests
 
-We have run a number of "smoke tests" to ensure the performance of Sage 2.2.0 on a few known problem cases.
+We have run a number of "smoke tests" to ensure the performance of Sage 2.2.1 on a few known problem cases. These are in the `smoketests` directory.
 
-`geometries` contains Jupyter notebooks showing the minimization of three problem chemistries that were addressed in Sage 2.2.0: sulfonamides, sulfamides, and 3-membered rings with heteroatoms.
+`geometries` contains Jupyter notebooks showing the minimization of three problem chemistries that were addressed in Sage 2.2.1: sulfonamides, sulfamides, and 3-membered rings with heteroatoms.
 
 `hmr` contains the result of an HMR simulation, ensuring it does not return NaN energies.
 
-`ligand_in_water_test` contains two jupyter notebooks, one for a sulfonamide and one for a sulfamide, being equlibrated in a box of water. The associated trajectories show that even in the presence of explicit solvent, these geometries which were problematic in Sage 2.0 and Sage 2.1 retain the correct structure with Sage 2.2.
-
-## Other files
-
-There are a few other files in this directory. `openff_unconstrained-2.2.0-rc1-nor4.offxml` is a copy of the new Sage 2.2.0 force field, copied from `04_fit-forcefield/nor4/fb-fit/result/optimize/force-field.offxml`. `remove_cosmetic_attributes.py` removes cosmetic attributes from `openff_unconstrained-2.2.0-rc1-nor4.offxml` and adds the Xe van der Waals parameters, as well as creates the constrained version and ensures both the constrained and unconstrained versions of Sage 2.2.0 can be loaded.
+`ligand_in_water_test` contains three outputs: `ligand`, `sulfamide`, and `sulfonamide`. The associated trajectories show that even in the presence of explicit solvent, these geometries which were problematic in Sage 2.0 and Sage 2.1 retain the correct structure with Sage 2.2.1.
