@@ -3,9 +3,6 @@
 This repository contains files and progress in re-fitting OpenFF 2.2.1,
 a patch update to [OpenFF 2.2.0](https://github.com/openforcefield/sage-2.2.0).
 
-**Note: this force field is still in progress, and many files (*especially READMEs*!)
-were copied across from the 2.2.0 repository that require modification.
-Use with caution!**
 
 The goals of this update were to:
 
@@ -36,33 +33,33 @@ repository, and then updated or modified.
 <!-- /vscode-markdown-toc -->
 
 ##  1. <a name='Fittingpipeline'></a>Fitting pipeline
-The code that was used to produce the fit is all included here, and should be reproducible. The fit is performed in several steps, with instructions for how to run each step in the `README` file in each directory:
+The code that was used to produce the fit is all included here, and should be reproducible. The fit is performed in several steps, with instructions for how to run each step in the `README` file in each directory. The purpose of each directory is described next to their names. We have also noted significant changes from the Sage 2.2.0 fitting process.
 
-### `01_generate-forcefield`: Generate an initial "template" force field, which contains the desired SMIRKs patterns for all bond/angle terms, the desired SMIRKs patterns and initial values for all torsion terms, and the desired final value for all other parameters such as electrostatics.
+**`01_generate-forcefield/`** : *Generate an initial "template" force field, which contains the desired SMIRKs patterns for all bond/angle terms, the desired SMIRKs patterns and initial values for all torsion terms, and the desired final value for all other parameters such as electrostatics.*
 
-This was modified to re-set all linear angles to 180°
+This was modified to re-set all linear angles to 180°.
 
-### `02_curate-data`: Download and filter/curate the optimized geometry and torsion drive datasets to use for the fit. Determine which parameters to optimize based on dataset coverage.
+**`02_curate-data/`** : *Download and filter/curate the optimized geometry and torsion drive datasets to use for the fit. Determine which parameters to optimize based on dataset coverage.*
 
 The files in this directory were *not* modified. Some scripts were
 added for inspecting the training set.
 
-### `03_generate-initial-ff`: Generate initial values for the bond and angle terms of the force field using the Modified Seminario Method.
+**`03_generate-initial-ff/`** : *Generate initial values for the bond and angle terms of the force field using the Modified Seminario Method.*
 
 Files in this directory were modified to avoid re-setting values
 for linear angles.
 
-### `04_fit-forcefield`: Fit the force field bonds, angles, and proper torsions to the data using ForceBalance.
+**`04_fit-forcefield/`** : *Fit the force field bonds, angles, and proper torsions to the data using ForceBalance.*
 
 All files in this directory were re-generated for the new fit.
 This directory contains the results of several fitting experiments.
 The `nor4` directory contains the fit that resulted in 2.2.1-rc1.
 
-### `05_benchmark_forcefield`: Benchmark the force field.
+**`05_benchmark_forcefield/`** : *Benchmark the force field.*
 
 Files in this directory were somewhat modified for updated analysis.
 
-### `06_plot-figures`: plot figures analyzing the new force field.
+**`06_plot-figures/`** : *plot figures analyzing the new force field.*
 
 This is a new directory that plots the benchmark results in the
 benchmarking directory.
